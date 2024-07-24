@@ -8,6 +8,9 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+	background-image:url('https://www.picgo.net/image/bg.k1fBCu');
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 .container {
