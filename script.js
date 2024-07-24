@@ -198,3 +198,4 @@
     window.viewCart = viewCart;
     window.backToMedicines = backToMedicines;
 })();
+
