@@ -1,8 +1,39 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
+    background-color: #f0f2f5;
     margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+}
+
+header {
+    background-color: #007bff;
+    color: white;
     padding: 20px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.centered-form {
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
@@ -11,9 +42,9 @@ h2 {
 
 input, select {
     display: block;
-    margin: 10px 0;
+    margin: 10px auto;
     padding: 10px;
-    width: 200px;
+    width: 100%;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
@@ -25,6 +56,7 @@ button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    width: 100%;
 }
 
 button:hover {
@@ -33,29 +65,44 @@ button:hover {
 
 .error {
     color: red;
+    margin-top: 10px;
+}
+
+.message {
+    color: green;
+    margin-top: 10px;
 }
 
 #medicines, #cart-items {
     margin-top: 20px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .medicine {
     border: 1px solid #ccc;
     padding: 10px;
-    margin: 10px 0;
-    border-radius: 4px;
-}
-
-.medicine h3 {
-    margin: 0;
-}
-
-.medicine p {
-    margin: 5px 0;
+    margin: 10px;
+    border-radius: 10px;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .medicine img {
     max-width: 100px;
-    margin-right: 10px;
-    vertical-align: middle;
+    margin-right: 20px;
+    border-radius: 10px;
+}
+
+.medicine h3 {
+    margin: 0 0 5px;
+}
+
+.medicine p {
+    margin: 5px 0;
 }
