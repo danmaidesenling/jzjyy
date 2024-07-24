@@ -53,3 +53,9 @@ button:hover {
 .medicine p {
     margin: 5px 0;
 }
+
+.medicine img {
+    max-width: 100px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
