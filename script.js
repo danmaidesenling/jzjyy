@@ -2,10 +2,24 @@
     var medicines = [
         { id: 1, name: '阿司匹林', description: '止痛药', price: 5.99, image: 'aspirin.jpg' },
         { id: 2, name: '布洛芬', description: '抗炎药', price: 8.99, image: 'ibuprofen.jpg' },
-        { id: 3, name: '对乙酰氨基酚', description: '退烧药', price: 6.99, image: 'paracetamol.jpg' }
+        { id: 3, name: '对乙酰氨基酚', description: '退烧药', price: 6.99, image: 'paracetamol.jpg' },
+        { id: 4, name: '维生素C', description: '增强免疫力', price: 4.99, image: 'vitamin_c.jpg' },
+        { id: 5, name: '阿莫西林', description: '抗生素', price: 10.99, image: 'amoxicillin.jpg' },
+        { id: 6, name: '头孢', description: '抗生素', price: 12.99, image: 'cephalosporin.jpg' },
+        { id: 7, name: '止咳糖浆', description: '止咳药', price: 6.50, image: 'cough_syrup.jpg' },
+        { id: 8, name: '抗过敏药', description: '抗过敏药', price: 9.99, image: 'antihistamine.jpg' },
+        { id: 9, name: '奥美拉唑', description: '胃药', price: 7.99, image: 'omeprazole.jpg' },
+        { id: 10, name: '复合维生素', description: '营养补充', price: 14.99, image: 'multivitamins.jpg' },
+        { id: 11, name: '抗菌药', description: '抗菌药', price: 11.99, image: 'antibacterial.jpg' },
+        { id: 12, name: '银翘解毒丸', description: '中成药', price: 8.50, image: 'yin_qiao.jpg' },
+        { id: 13, name: '牛黄解毒片', description: '中成药', price: 10.50, image: 'niu_huang.jpg' },
+        { id: 14, name: '复方感冒药', description: '感冒药', price: 9.00, image: 'cold_medicine.jpg' },
+        { id: 15, name: '抗真菌药', description: '抗真菌药', price: 13.99, image: 'antifungal.jpg' }
     ];
 
     var cart = [];
+    var currentPage = 1;
+    var itemsPerPage = 10;
 
     function login() {
         var username = document.getElementById('username').value;
@@ -17,6 +31,7 @@
             document.getElementById('login').style.display = 'none';
             document.getElementById('medicine-list').style.display = 'block';
             displayMedicines();
+            setupPagination();
         } else {
             errorElem.innerHTML = '用户名或密码错误';
         }
@@ -26,8 +41,12 @@
         var medicinesElem = document.getElementById('medicines');
         medicinesElem.innerHTML = '';
 
-        for (var i = 0; i < medicines.length; i++) {
-            var medicine = medicines[i];
+        var startIndex = (currentPage - 1) * itemsPerPage;
+        var endIndex = startIndex + itemsPerPage;
+        var paginatedItems = medicines.slice(startIndex, endIndex);
+
+        for (var i = 0; i < paginatedItems.length; i++) {
+            var medicine = paginatedItems[i];
             var div = document.createElement('div');
             div.className = 'medicine';
 
@@ -144,8 +163,38 @@
         document.getElementById('medicine-list').style.display = 'block';
     }
 
+    function setupPagination() {
+        var paginationElem = document.getElementById('pagination');
+        paginationElem.innerHTML = '';
+
+        var totalPages = Math.ceil(medicines.length / itemsPerPage);
+
+        for (var i = 1; i <= totalPages; i++) {
+            var pageButton = document.createElement('button');
+            pageButton.className = 'page-button';
+            pageButton.innerHTML = i;
+            pageButton.onclick = function() {
+                currentPage = parseInt(this.innerHTML, 10);
+                displayMedicines();
+                updatePagination();
+            };
+            paginationElem.appendChild(pageButton);
+        }
+
+        updatePagination();
+    }
+
+    function updatePagination() {
+        var paginationButtons = document.getElementsByClassName('page-button');
+
+        for (var i = 0; i < paginationButtons.length; i++) {
+            paginationButtons[i].classList.remove('active');
+        }
+
+        paginationButtons[currentPage - 1].classList.add('active');
+    }
+
     window.login = login;
     window.viewCart = viewCart;
     window.backToMedicines = backToMedicines;
 })();
-
