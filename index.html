@@ -1,29 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>药品销售管理</title>
+    <title>四川金贝壳医疗科技有限公司 - 药品销售管理</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="login">
-        <h2>登录</h2>
-        <input type="text" id="username" placeholder="用户名">
-        <input type="password" id="password" placeholder="密码">
-        <button onclick="login()">登录</button>
-        <p id="login-error" class="error"></p>
-    </div>
+    <div class="container">
+        <header>
+            <h1>四川金贝壳医疗科技有限公司</h1>
+        </header>
 
-    <div id="medicine-list" style="display: none;">
-        <h2>可用药品</h2>
-        <div id="medicines"></div>
-        <button onclick="viewCart()">查看购物车</button>
-    </div>
+        <div id="login" class="centered-form">
+            <h2>登录</h2>
+            <input type="text" id="username" placeholder="用户名">
+            <input type="password" id="password" placeholder="密码">
+            <button onclick="login()">登录</button>
+            <p id="login-error" class="error"></p>
+        </div>
 
-    <div id="cart" style="display: none;">
-        <h2>购物车</h2>
-        <div id="cart-items"></div>
-        <p id="total-price">总价: ¥0.00</p>
-        <button onclick="backToMedicines()">返回药品列表</button>
+        <div id="medicine-list" style="display: none;">
+            <h2>可用药品</h2>
+            <div id="medicines"></div>
+            <p id="add-cart-message" class="message"></p>
+            <button onclick="viewCart()">查看购物车</button>
+        </div>
+
+        <div id="cart" style="display: none;">
+            <h2>购物车</h2>
+            <div id="cart-items"></div>
+            <p id="total-price">总价: ¥0.00</p>
+            <button onclick="backToMedicines()">返回药品列表</button>
+        </div>
     </div>
 
     <script src="script.js"></script>

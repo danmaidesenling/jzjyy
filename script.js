@@ -82,7 +82,15 @@
             cart.push({ medicine: medicine, quantity: quantity });
         }
 
-        alert(medicine.name + ' 已添加到购物车。');
+        displayMessage(medicine.name + ' 已添加到购物车。', 'add-cart-message');
+    }
+
+    function displayMessage(message, elementId) {
+        var messageElem = document.getElementById(elementId);
+        messageElem.innerHTML = message;
+        setTimeout(function() {
+            messageElem.innerHTML = '';
+        }, 3000);
     }
 
     function viewCart() {
@@ -140,3 +148,4 @@
     window.viewCart = viewCart;
     window.backToMedicines = backToMedicines;
 })();
+
