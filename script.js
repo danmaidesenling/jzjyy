@@ -48,6 +48,17 @@
             price.innerHTML = '价格: ¥' + medicine.price.toFixed(2);
             div.appendChild(price);
 
+            var quantityLabel = document.createElement('label');
+            quantityLabel.innerHTML = '数量: ';
+            div.appendChild(quantityLabel);
+
+            var quantityInput = document.createElement('input');
+            quantityInput.type = 'number';
+            quantityInput.value = 1;
+            quantityInput.min = 1;
+            quantityInput.id = 'quantity-' + medicine.id;
+            div.appendChild(quantityInput);
+
             var button = document.createElement('button');
             button.innerHTML = '添加到购物车';
             button.setAttribute('data-id', medicine.id);
@@ -60,8 +71,17 @@
 
     function addToCart() {
         var id = parseInt(this.getAttribute('data-id'), 10);
+        var quantity = parseInt(document.getElementById('quantity-' + id).value, 10);
         var medicine = medicines.find(function(med) { return med.id === id; });
-        cart.push(medicine);
+
+        var cartItem = cart.find(function(item) { return item.medicine.id === id; });
+
+        if (cartItem) {
+            cartItem.quantity += quantity;
+        } else {
+            cart.push({ medicine: medicine, quantity: quantity });
+        }
+
         alert(medicine.name + ' 已添加到购物车。');
     }
 
@@ -78,7 +98,10 @@
             cartItemsElem.innerHTML = '您的购物车是空的。';
         } else {
             for (var i = 0; i < cart.length; i++) {
-                var medicine = cart[i];
+                var cartItem = cart[i];
+                var medicine = cartItem.medicine;
+                var quantity = cartItem.quantity;
+
                 var div = document.createElement('div');
                 div.className = 'medicine';
 
@@ -96,12 +119,12 @@
                 div.appendChild(description);
 
                 var price = document.createElement('p');
-                price.innerHTML = '价格: ¥' + medicine.price.toFixed(2);
+                price.innerHTML = '价格: ¥' + medicine.price.toFixed(2) + ' x ' + quantity;
                 div.appendChild(price);
 
                 cartItemsElem.appendChild(div);
 
-                totalPrice += medicine.price;
+                totalPrice += medicine.price * quantity;
             }
         }
 
