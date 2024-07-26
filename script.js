@@ -1,20 +1,21 @@
 (function() {
+	var medicalReagentsImageUrl = 'https://img.picgo.net/2024/07/26/midical5ac195f8b8ff51c4.png';
     var medicines = [
-        { id: 1, name: '阿司匹林', description: '止痛药', price: 5.99, image: 'aspirin.jpg' },
-        { id: 2, name: '布洛芬', description: '抗炎药', price: 8.99, image: 'ibuprofen.jpg' },
-        { id: 3, name: '对乙酰氨基酚', description: '退烧药', price: 6.99, image: 'paracetamol.jpg' },
-        { id: 4, name: '维生素C', description: '增强免疫力', price: 4.99, image: 'vitamin_c.jpg' },
-        { id: 5, name: '阿莫西林', description: '抗生素', price: 10.99, image: 'amoxicillin.jpg' },
-        { id: 6, name: '头孢', description: '抗生素', price: 12.99, image: 'cephalosporin.jpg' },
-        { id: 7, name: '止咳糖浆', description: '止咳药', price: 6.50, image: 'cough_syrup.jpg' },
-        { id: 8, name: '抗过敏药', description: '抗过敏药', price: 9.99, image: 'antihistamine.jpg' },
-        { id: 9, name: '奥美拉唑', description: '胃药', price: 7.99, image: 'omeprazole.jpg' },
-        { id: 10, name: '复合维生素', description: '营养补充', price: 14.99, image: 'multivitamins.jpg' },
-        { id: 11, name: '抗菌药', description: '抗菌药', price: 11.99, image: 'antibacterial.jpg' },
-        { id: 12, name: '银翘解毒丸', description: '中成药', price: 8.50, image: 'yin_qiao.jpg' },
-        { id: 13, name: '牛黄解毒片', description: '中成药', price: 10.50, image: 'niu_huang.jpg' },
-        { id: 14, name: '复方感冒药', description: '感冒药', price: 9.00, image: 'cold_medicine.jpg' },
-        { id: 15, name: '抗真菌药', description: '抗真菌药', price: 13.99, image: 'antifungal.jpg' }
+        { id: 1, name: '血清学检测试剂', description: '用于血清学检测的试剂', price: 50.99, image: medicalReagentsImageUrl },
+        { id: 2, name: '酶联免疫吸附试剂', description: '用于ELISA检测的试剂', price: 80.99, image: medicalReagentsImageUrl },
+        { id: 3, name: '聚合酶链反应试剂', description: '用于PCR检测的试剂', price: 120.99, image: medicalReagentsImageUrl },
+        { id: 4, name: '细胞培养基', description: '用于细胞培养的试剂', price: 60.99, image: medicalReagentsImageUrl },
+        { id: 5, name: '蛋白质分析试剂', description: '用于蛋白质分析的试剂', price: 100.99, image: medicalReagentsImageUrl },
+        { id: 6, name: '核酸提取试剂', description: '用于核酸提取的试剂', price: 75.99, image: medicalReagentsImageUrl },
+        { id: 7, name: '流式细胞仪试剂', description: '用于流式细胞检测的试剂', price: 95.99, image: medicalReagentsImageUrl },
+        { id: 8, name: '基因组测序试剂', description: '用于基因组测序的试剂', price: 150.99, image: medicalReagentsImageUrl },
+        { id: 9, name: '免疫荧光试剂', description: '用于免疫荧光检测的试剂', price: 85.99, image: medicalReagentsImageUrl },
+        { id: 10, name: '化学发光试剂', description: '用于化学发光检测的试剂', price: 110.99, image: medicalReagentsImageUrl },
+        { id: 11, name: '抗体试剂盒', description: '用于抗体检测的试剂盒', price: 130.99, image: medicalReagentsImageUrl },
+        { id: 12, name: '血液学分析试剂', description: '用于血液学分析的试剂', price: 90.99, image: medicalReagentsImageUrl },
+        { id: 13, name: '生化分析试剂', description: '用于生化分析的试剂', price: 70.99, image: medicalReagentsImageUrl },
+        { id: 14, name: '病理分析试剂', description: '用于病理分析的试剂', price: 115.99, image: medicalReagentsImageUrl },
+        { id: 15, name: '分子生物学试剂', description: '用于分子生物学研究的试剂', price: 140.99, image: medicalReagentsImageUrl }
     ];
 
     var cart = [];
