@@ -193,9 +193,21 @@
 
         paginationButtons[currentPage - 1].classList.add('active');
     }
+	
+	function pay() {
+        var popup = document.getElementById('barcode-popup');
+        popup.style.display = 'flex';
+    }
+
+    function closePopup() {
+        var popup = document.getElementById('barcode-popup');
+        popup.style.display = 'none';
+    }
 
     window.login = login;
     window.viewCart = viewCart;
     window.backToMedicines = backToMedicines;
+    window.pay = pay;
+    window.closePopup = closePopup;
 })();
 
