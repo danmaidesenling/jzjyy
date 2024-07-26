@@ -31,6 +31,15 @@
             <div id="cart-items"></div>
             <p id="total-price">总价: ¥0.00</p>
             <button onclick="backToMedicines()">返回药品列表</button>
+            <button onclick="pay()">支付</button>
+        </div>
+
+        <div id="barcode-popup" class="popup" style="display: none;">
+            <div class="popup-content">
+                <span class="close" onclick="closePopup()">&times;</span>
+                <h2>支付二维码</h2>
+                <img src="barcode.png" alt="支付二维码">
+            </div>
         </div>
     </div>
 
