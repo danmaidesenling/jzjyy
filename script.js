@@ -33,6 +33,7 @@
             document.getElementById('medicine-list').style.display = 'block';
             displayMedicines();
             setupPagination();
+			renderMedicineList();
         } else {
             errorElem.innerHTML = '用户名或密码错误';
         }
@@ -256,7 +257,29 @@
             alert('请输入反馈内容。');
         }
     }
+	
+	function renderMedicineList() {
+        var medicinesContainer = document.getElementById('medicines');
+        medicinesContainer.innerHTML = ''; // Clear previous content
 
+        medicines.forEach(function(medicine) {
+            var medicineDiv = document.createElement('div');
+            medicineDiv.className = 'medicine-item';
+
+            medicineDiv.innerHTML = `
+                <img src="${medicine.image}" alt="${medicine.name}">
+                <h3>${medicine.name}</h3>
+                <p>${medicine.description}</p>
+                <p>价格: ¥${medicine.price}</p>
+                <button onclick="addToCart(${medicine.id})">加入购物车</button>
+            `;
+
+            medicinesContainer.appendChild(medicineDiv);
+        });
+    }
+	if (document.getElementById('medicine-list-page').style.display !== 'none') {
+        renderMedicineList();
+    }
     window.login = login;
     window.viewCart = viewCart;
     window.backToMedicines = backToMedicines;
