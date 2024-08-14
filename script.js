@@ -33,6 +33,7 @@
             document.getElementById('medicine-list').style.display = 'block';
             displayMedicines();
             setupPagination();
+			renderMedicineList();
         } else {
             errorElem.innerHTML = '用户名或密码错误';
         }
@@ -204,11 +205,90 @@
         var popup = document.getElementById('barcode-popup');
         popup.style.display = 'none';
     }
+	
+	function showRegister() {
+        document.getElementById('login').style.display = 'none';
+        document.getElementById('register').style.display = 'block';
+    }
 
+    function register() {
+        var username = document.getElementById('reg-username').value;
+        var password = document.getElementById('reg-password').value;
+        var role = document.getElementById('reg-role').value;
+        var activeCode = document.getElementById('reg-active-code').value;
+
+        if (username && password && role && activeCode) {
+            // In a real application, this would involve saving the user info to a database
+            alert('注册成功！');
+            document.getElementById('register').style.display = 'none';
+            document.getElementById('login').style.display = 'block';
+        } else {
+            document.getElementById('register-error').innerHTML = '请填写所有字段。';
+        }
+    }
+
+    function showTab(tabId) {
+        var tabs = document.getElementsByClassName('tab-content');
+        for (var i = 0; i < tabs.length; i++) {
+            tabs[i].classList.remove('active');
+        }
+        document.getElementById(tabId).classList.add('active');
+    }
+
+    function addAddress() {
+        var address = document.getElementById('address').value;
+        if (address) {
+            var addressList = document.getElementById('address-list');
+            var addressItem = document.createElement('p');
+            addressItem.innerHTML = address;
+            addressList.appendChild(addressItem);
+            alert('地址已保存！');
+        } else {
+            alert('请输入地址。');
+        }
+    }
+
+    function submitFeedback() {
+        var feedbackMessage = document.getElementById('feedback-message').value;
+        if (feedbackMessage) {
+            document.getElementById('feedback-status').innerHTML = '感谢您的反馈！';
+            document.getElementById('feedback-message').value = '';
+        } else {
+            alert('请输入反馈内容。');
+        }
+    }
+	
+	function renderMedicineList() {
+        var medicinesContainer = document.getElementById('medicines');
+        medicinesContainer.innerHTML = ''; // Clear previous content
+
+        medicines.forEach(function(medicine) {
+            var medicineDiv = document.createElement('div');
+            medicineDiv.className = 'medicine-item';
+
+            medicineDiv.innerHTML = `
+                <img src="${medicine.image}" alt="${medicine.name}">
+                <h3>${medicine.name}</h3>
+                <p>${medicine.description}</p>
+                <p>价格: ¥${medicine.price}</p>
+                <button onclick="addToCart(${medicine.id})">加入购物车</button>
+            `;
+
+            medicinesContainer.appendChild(medicineDiv);
+        });
+    }
+	if (document.getElementById('medicine-list-page').style.display !== 'none') {
+        renderMedicineList();
+    }
     window.login = login;
     window.viewCart = viewCart;
     window.backToMedicines = backToMedicines;
     window.pay = pay;
     window.closePopup = closePopup;
+    window.showRegister = showRegister;
+    window.register = register;
+    window.showTab = showTab;
+    window.addAddress = addAddress;
+    window.submitFeedback = submitFeedback;
 })();
 

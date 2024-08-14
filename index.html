@@ -10,23 +10,67 @@
             <h1>四川金贝壳医疗科技有限公司</h1>
         </header>
 
+        <!-- Registration Form -->
+        <div id="register" class="centered-form" style="display: none;">
+            <h2>注册</h2>
+            <input type="text" id="reg-username" placeholder="用户名">
+            <input type="password" id="reg-password" placeholder="密码">
+            <label for="reg-role">角色:</label>
+            <select id="reg-role">
+                <option value="销售代表">销售代表</option>
+                <option value="厂家">厂家</option>
+                <option value="药房">药房</option>
+            </select>
+            <input type="text" id="reg-active-code" placeholder="激活码">
+            <button onclick="register()">注册</button>
+            <p id="register-error" class="error"></p>
+        </div>
+
+        <!-- Login Form -->
         <div id="login" class="centered-form">
             <h2>登录</h2>
             <input type="text" id="username" placeholder="用户名">
             <input type="password" id="password" placeholder="密码">
             <button onclick="login()">登录</button>
             <p id="login-error" class="error"></p>
+            <p>还没有账号？ <a href="#" onclick="showRegister()">注册</a></p>
         </div>
 
-        <div id="medicine-list" style="display: none;">
-            <h2>可用药品 - 四川金贝壳医疗科技有限公司</h2>
-            <div id="medicines" class="medicine-container"></div>
-            <div id="pagination"></div>
-            <p id="add-cart-message" class="message"></p>
-            <button onclick="viewCart()">查看购物车</button>
+        <!-- Medicine List with Tabs -->
+        <div id="medicine-list-page" style="display: none;">
+            <div class="tabs">
+                <button class="tab-button" onclick="showTab('medicine-list')">药品列表</button>
+                <button class="tab-button" onclick="showTab('address-management')">地址管理</button>
+                <button class="tab-button" onclick="showTab('feedback')">反馈</button>
+            </div>
+
+            <!-- Medicine List Tab -->
+            <div id="medicine-list" class="tab-content">
+                <h2>可用药品 - 四川金贝壳医疗科技有限公司</h2>
+                <div id="medicines" class="medicine-container"></div>
+                <div id="pagination"></div>
+                <p id="add-cart-message" class="message"></p>
+                <button onclick="viewCart()">查看购物车</button>
+            </div>
+
+            <!-- Address Management Tab -->
+            <div id="address-management" class="tab-content" style="display: none;">
+                <h2>地址管理</h2>
+                <input type="text" id="address" placeholder="收货地址">
+                <button onclick="addAddress()">保存地址</button>
+                <div id="address-list"></div>
+            </div>
+
+            <!-- Feedback Tab -->
+            <div id="feedback" class="tab-content" style="display: none;">
+                <h2>反馈</h2>
+                <textarea id="feedback-message" placeholder="请输入您的问题或建议"></textarea>
+                <button onclick="submitFeedback()">提交反馈</button>
+                <p id="feedback-status" class="message"></p>
+            </div>
         </div>
 
-        <div id="cart" style="display: none;">
+       <div id="cart" style="display: none;">
             <h2>购物车</h2>
             <div id="cart-items"></div>
             <p id="total-price">总价: ¥0.00</p>
@@ -46,3 +90,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
