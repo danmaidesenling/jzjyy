@@ -1,3 +1,4 @@
+(function() {
 function login() {
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
@@ -67,3 +68,5 @@ function pay() {
 function closePopup() {
     document.getElementById("barcode-popup").style.display = "none";
 }
+
+})();
