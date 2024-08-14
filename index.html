@@ -1,93 +1,98 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-    <title>四川金贝壳医疗科技有限公司 - 药品销售管理</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>四川金贝壳医疗科技有限公司</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>四川金贝壳医疗科技有限公司</h1>
-        </header>
+    <header>
+        <h1>四川金贝壳医疗科技有限公司</h1>
+    </header>
 
-        <!-- Registration Form -->
-        <div id="register" class="centered-form" style="display: none;">
-            <h2>注册</h2>
-            <input type="text" id="reg-username" placeholder="用户名">
-            <input type="password" id="reg-password" placeholder="密码">
-            <label for="reg-role">角色:</label>
-            <select id="reg-role">
-                <option value="销售代表">销售代表</option>
-                <option value="厂家">厂家</option>
-                <option value="药房">药房</option>
-            </select>
-            <input type="text" id="reg-active-code" placeholder="激活码">
-            <button onclick="register()">注册</button>
-            <p id="register-error" class="error"></p>
-        </div>
-
+    <div id="main-content">
         <!-- Login Form -->
-        <div id="login" class="centered-form">
+        <div id="login-form">
             <h2>登录</h2>
-            <input type="text" id="username" placeholder="用户名">
-            <input type="password" id="password" placeholder="密码">
-            <button onclick="login()">登录</button>
-            <p id="login-error" class="error"></p>
-            <p>还没有账号？ <a href="#" onclick="showRegister()">注册</a></p>
+            <form onsubmit="return login();">
+                <label for="username">用户名:</label>
+                <input type="text" id="username" required>
+                <label for="password">密码:</label>
+                <input type="password" id="password" required>
+                <button type="submit">登录</button>
+            </form>
+            <p>还没有账号？<a href="#" onclick="showRegister();">注册</a></p>
         </div>
 
-        <!-- Medicine List with Tabs -->
-        <div id="medicine-list-page" style="display: none;">
-            <div class="tabs">
-                <button class="tab-button" onclick="showTab('medicine-list')">药品列表</button>
-                <button class="tab-button" onclick="showTab('address-management')">地址管理</button>
-                <button class="tab-button" onclick="showTab('feedback')">反馈</button>
-            </div>
-
-            <!-- Medicine List Tab -->
-            <div id="medicine-list" class="tab-content">
-                <h2>可用药品 - 四川金贝壳医疗科技有限公司</h2>
-                <div id="medicines" class="medicine-container"></div>
-                <div id="pagination"></div>
-                <p id="add-cart-message" class="message"></p>
-                <button onclick="viewCart()">查看购物车</button>
-            </div>
-
-            <!-- Address Management Tab -->
-            <div id="address-management" class="tab-content" style="display: none;">
-                <h2>地址管理</h2>
-                <input type="text" id="address" placeholder="收货地址">
-                <button onclick="addAddress()">保存地址</button>
-                <div id="address-list"></div>
-            </div>
-
-            <!-- Feedback Tab -->
-            <div id="feedback" class="tab-content" style="display: none;">
-                <h2>反馈</h2>
-                <textarea id="feedback-message" placeholder="请输入您的问题或建议"></textarea>
-                <button onclick="submitFeedback()">提交反馈</button>
-                <p id="feedback-status" class="message"></p>
-            </div>
+        <!-- Register Form -->
+        <div id="register-form" style="display:none;">
+            <h2>注册</h2>
+            <form onsubmit="return register();">
+                <label for="reg-username">用户名:</label>
+                <input type="text" id="reg-username" required>
+                <label for="reg-password">密码:</label>
+                <input type="password" id="reg-password" required>
+                <label for="reg-role">角色:</label>
+                <select id="reg-role">
+                    <option value="销售代表">销售代表</option>
+                    <option value="厂家">厂家</option>
+                    <option value="药房">药房</option>
+                </select>
+                <label for="reg-code">激活码:</label>
+                <input type="text" id="reg-code" required>
+                <button type="submit">注册</button>
+            </form>
+            <p>已有账号？<a href="#" onclick="showLogin();">登录</a></p>
         </div>
 
-       <div id="cart" style="display: none;">
-            <h2>购物车</h2>
-            <div id="cart-items"></div>
-            <p id="total-price">总价: ¥0.00</p>
-            <button onclick="backToMedicines()">返回药品列表</button>
-            <button onclick="pay()">支付</button>
-        </div>
-
-        <div id="barcode-popup" class="popup" style="display: none;">
-            <div class="popup-content">
-                <span class="close" onclick="closePopup()">&times;</span>
-                <h2>支付二维码</h2>
-                <img src="https://img.picgo.net/2024/07/26/barcode0b0a74712ed632ac.png" alt="支付二维码">
+        <!-- Main Page -->
+        <div id="main-page" style="display:none;">
+            <div id="tabs">
+                <ul>
+                    <li onclick="showTab('tab1')">药品列表</li>
+                    <li onclick="showTab('tab2')">地址管理</li>
+                    <li onclick="showTab('tab3')">物流信息</li>
+                    <li onclick="showTab('tab4')">反馈</li>
+                </ul>
+            </div>
+            <div id="tab-content">
+                <div id="tab1" class="tab">
+                    <!-- Medical Reagents List -->
+                    <div id="reagents-list">
+                        <!-- Reagents items will be dynamically loaded here -->
+                    </div>
+                    <button onclick="pay();">支付</button>
+                </div>
+                <div id="tab2" class="tab" style="display:none;">
+                    <h2>地址管理</h2>
+                    <!-- User address management content -->
+                </div>
+                <div id="tab3" class="tab" style="display:none;">
+                    <h2>物流信息</h2>
+                    <!-- Logistics information content -->
+                </div>
+                <div id="tab4" class="tab" style="display:none;">
+                    <h2>反馈</h2>
+                    <form>
+                        <label for="feedback">反馈内容:</label>
+                        <textarea id="feedback"></textarea>
+                        <button type="submit">提交</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Barcode Popup -->
+    <div id="barcode-popup" style="display:none;">
+        <div class="popup-content">
+            <span onclick="closePopup();" class="close">&times;</span>
+            <h2>扫码支付</h2>
+            <img src="barcode.png" alt="Barcode">
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
 </body>
 </html>
-
