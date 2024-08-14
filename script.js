@@ -1,294 +1,69 @@
-(function() {
-	var medicalReagentsImageUrl = 'https://img.picgo.net/2024/07/26/midical5ac195f8b8ff51c4.png';
-    var medicines = [
-        { id: 1, name: '血清学检测试剂', description: '用于血清学检测的试剂', price: 50.99, image: medicalReagentsImageUrl },
-        { id: 2, name: '酶联免疫吸附试剂', description: '用于ELISA检测的试剂', price: 80.99, image: medicalReagentsImageUrl },
-        { id: 3, name: '聚合酶链反应试剂', description: '用于PCR检测的试剂', price: 120.99, image: medicalReagentsImageUrl },
-        { id: 4, name: '细胞培养基', description: '用于细胞培养的试剂', price: 60.99, image: medicalReagentsImageUrl },
-        { id: 5, name: '蛋白质分析试剂', description: '用于蛋白质分析的试剂', price: 100.99, image: medicalReagentsImageUrl },
-        { id: 6, name: '核酸提取试剂', description: '用于核酸提取的试剂', price: 75.99, image: medicalReagentsImageUrl },
-        { id: 7, name: '流式细胞仪试剂', description: '用于流式细胞检测的试剂', price: 95.99, image: medicalReagentsImageUrl },
-        { id: 8, name: '基因组测序试剂', description: '用于基因组测序的试剂', price: 150.99, image: medicalReagentsImageUrl },
-        { id: 9, name: '免疫荧光试剂', description: '用于免疫荧光检测的试剂', price: 85.99, image: medicalReagentsImageUrl },
-        { id: 10, name: '化学发光试剂', description: '用于化学发光检测的试剂', price: 110.99, image: medicalReagentsImageUrl },
-        { id: 11, name: '抗体试剂盒', description: '用于抗体检测的试剂盒', price: 130.99, image: medicalReagentsImageUrl },
-        { id: 12, name: '血液学分析试剂', description: '用于血液学分析的试剂', price: 90.99, image: medicalReagentsImageUrl },
-        { id: 13, name: '生化分析试剂', description: '用于生化分析的试剂', price: 70.99, image: medicalReagentsImageUrl },
-        { id: 14, name: '病理分析试剂', description: '用于病理分析的试剂', price: 115.99, image: medicalReagentsImageUrl },
-        { id: 15, name: '分子生物学试剂', description: '用于分子生物学研究的试剂', price: 140.99, image: medicalReagentsImageUrl }
+function login() {
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+
+    if (username === "admin" && password === "123") {
+        document.getElementById("login-form").style.display = "none";
+        document.getElementById("main-page").style.display = "block";
+        loadReagents();
+        return false;
+    } else {
+        alert("用户名或密码错误");
+        return false;
+    }
+}
+
+function register() {
+    // Basic registration logic
+    alert("注册成功");
+    showLogin();
+    return false;
+}
+
+function showRegister() {
+    document.getElementById("login-form").style.display = "none";
+    document.getElementById("register-form").style.display = "block";
+}
+
+function showLogin() {
+    document.getElementById("register-form").style.display = "none";
+    document.getElementById("login-form").style.display = "block";
+}
+
+function showTab(tabId) {
+    var tabs = document.getElementsByClassName("tab");
+    for (var i = 0; i < tabs.length; i++) {
+        tabs[i].style.display = "none";
+    }
+    document.getElementById(tabId).style.display = "block";
+}
+
+function loadReagents() {
+    var reagents = [
+        {name: "药品1", description: "这是药品1的描述", price: "100元"},
+        {name: "药品2", description: "这是药品2的描述", price: "150元"},
+        // More items can be added here
     ];
 
-    var cart = [];
-    var currentPage = 1;
-    var itemsPerPage = 10;
+    var reagentsList = document.getElementById("reagents-list");
+    reagentsList.innerHTML = "";
 
-    function login() {
-        var username = document.getElementById('username').value;
-        var password = document.getElementById('password').value;
-        var errorElem = document.getElementById('login-error');
-
-        if (username === 'user' && password === '123') {
-            errorElem.innerHTML = '';
-            document.getElementById('login').style.display = 'none';
-            document.getElementById('medicine-list').style.display = 'block';
-            displayMedicines();
-            setupPagination();
-			renderMedicineList();
-        } else {
-            errorElem.innerHTML = '用户名或密码错误';
-        }
+    for (var i = 0; i < reagents.length; i++) {
+        var item = document.createElement("div");
+        item.className = "reagent-item";
+        item.innerHTML = "<h3>" + reagents[i].name + "</h3><p>" + reagents[i].description + "</p><p>价格: " + reagents[i].price + "</p><input type='number' value='1' min='1'><button onclick='addToCart();'>加入购物车</button>";
+        reagentsList.appendChild(item);
     }
+}
 
-    function displayMedicines() {
-        var medicinesElem = document.getElementById('medicines');
-        medicinesElem.innerHTML = '';
+function addToCart() {
+    alert("加入购物车成功");
+}
 
-        var startIndex = (currentPage - 1) * itemsPerPage;
-        var endIndex = startIndex + itemsPerPage;
-        var paginatedItems = medicines.slice(startIndex, endIndex);
+function pay() {
+    document.getElementById("barcode-popup").style.display = "block";
+}
 
-        for (var i = 0; i < paginatedItems.length; i++) {
-            var medicine = paginatedItems[i];
-            var div = document.createElement('div');
-            div.className = 'medicine';
-
-            var img = document.createElement('img');
-            img.src = medicine.image;
-            img.alt = medicine.name;
-            div.appendChild(img);
-
-            var name = document.createElement('h3');
-            name.innerHTML = medicine.name;
-            div.appendChild(name);
-
-            var description = document.createElement('p');
-            description.innerHTML = '描述: ' + medicine.description;
-            div.appendChild(description);
-
-            var price = document.createElement('p');
-            price.innerHTML = '价格: ¥' + medicine.price.toFixed(2);
-            div.appendChild(price);
-
-            var quantityLabel = document.createElement('label');
-            quantityLabel.innerHTML = '数量: ';
-            div.appendChild(quantityLabel);
-
-            var quantityInput = document.createElement('input');
-            quantityInput.type = 'number';
-            quantityInput.value = 1;
-            quantityInput.min = 1;
-            quantityInput.id = 'quantity-' + medicine.id;
-            div.appendChild(quantityInput);
-
-            var button = document.createElement('button');
-            button.innerHTML = '添加到购物车';
-            button.setAttribute('data-id', medicine.id);
-            button.onclick = addToCart;
-            div.appendChild(button);
-
-            medicinesElem.appendChild(div);
-        }
-    }
-
-    function addToCart() {
-        var id = parseInt(this.getAttribute('data-id'), 10);
-        var quantity = parseInt(document.getElementById('quantity-' + id).value, 10);
-        var medicine = medicines.find(function(med) { return med.id === id; });
-
-        var cartItem = cart.find(function(item) { return item.medicine.id === id; });
-
-        if (cartItem) {
-            cartItem.quantity += quantity;
-        } else {
-            cart.push({ medicine: medicine, quantity: quantity });
-        }
-
-        displayMessage(medicine.name + ' 已添加到购物车。', 'add-cart-message');
-    }
-
-    function displayMessage(message, elementId) {
-        var messageElem = document.getElementById(elementId);
-        messageElem.innerHTML = message;
-        setTimeout(function() {
-            messageElem.innerHTML = '';
-        }, 3000);
-    }
-
-    function viewCart() {
-        document.getElementById('medicine-list').style.display = 'none';
-        document.getElementById('cart').style.display = 'block';
-
-        var cartItemsElem = document.getElementById('cart-items');
-        cartItemsElem.innerHTML = '';
-
-        var totalPrice = 0;
-
-        if (cart.length === 0) {
-            cartItemsElem.innerHTML = '您的购物车是空的。';
-        } else {
-            for (var i = 0; i < cart.length; i++) {
-                var cartItem = cart[i];
-                var medicine = cartItem.medicine;
-                var quantity = cartItem.quantity;
-
-                var div = document.createElement('div');
-                div.className = 'medicine';
-
-                var img = document.createElement('img');
-                img.src = medicine.image;
-                img.alt = medicine.name;
-                div.appendChild(img);
-
-                var name = document.createElement('h3');
-                name.innerHTML = medicine.name;
-                div.appendChild(name);
-
-                var description = document.createElement('p');
-                description.innerHTML = '描述: ' + medicine.description;
-                div.appendChild(description);
-
-                var price = document.createElement('p');
-                price.innerHTML = '价格: ¥' + medicine.price.toFixed(2) + ' x ' + quantity;
-                div.appendChild(price);
-
-                cartItemsElem.appendChild(div);
-
-                totalPrice += medicine.price * quantity;
-            }
-        }
-
-        document.getElementById('total-price').innerHTML = '总价: ¥' + totalPrice.toFixed(2);
-    }
-
-    function backToMedicines() {
-        document.getElementById('cart').style.display = 'none';
-        document.getElementById('medicine-list').style.display = 'block';
-    }
-
-    function setupPagination() {
-        var paginationElem = document.getElementById('pagination');
-        paginationElem.innerHTML = '';
-
-        var totalPages = Math.ceil(medicines.length / itemsPerPage);
-
-        for (var i = 1; i <= totalPages; i++) {
-            var pageButton = document.createElement('button');
-            pageButton.className = 'page-button';
-            pageButton.innerHTML = i;
-            pageButton.onclick = function() {
-                currentPage = parseInt(this.innerHTML, 10);
-                displayMedicines();
-                updatePagination();
-            };
-            paginationElem.appendChild(pageButton);
-        }
-
-        updatePagination();
-    }
-
-    function updatePagination() {
-        var paginationButtons = document.getElementsByClassName('page-button');
-
-        for (var i = 0; i < paginationButtons.length; i++) {
-            paginationButtons[i].classList.remove('active');
-        }
-
-        paginationButtons[currentPage - 1].classList.add('active');
-    }
-	
-	function pay() {
-        var popup = document.getElementById('barcode-popup');
-        popup.style.display = 'flex';
-    }
-
-    function closePopup() {
-        var popup = document.getElementById('barcode-popup');
-        popup.style.display = 'none';
-    }
-	
-	function showRegister() {
-        document.getElementById('login').style.display = 'none';
-        document.getElementById('register').style.display = 'block';
-    }
-
-    function register() {
-        var username = document.getElementById('reg-username').value;
-        var password = document.getElementById('reg-password').value;
-        var role = document.getElementById('reg-role').value;
-        var activeCode = document.getElementById('reg-active-code').value;
-
-        if (username && password && role && activeCode) {
-            // In a real application, this would involve saving the user info to a database
-            alert('注册成功！');
-            document.getElementById('register').style.display = 'none';
-            document.getElementById('login').style.display = 'block';
-        } else {
-            document.getElementById('register-error').innerHTML = '请填写所有字段。';
-        }
-    }
-
-    function showTab(tabId) {
-        var tabs = document.getElementsByClassName('tab-content');
-        for (var i = 0; i < tabs.length; i++) {
-            tabs[i].classList.remove('active');
-        }
-        document.getElementById(tabId).classList.add('active');
-    }
-
-    function addAddress() {
-        var address = document.getElementById('address').value;
-        if (address) {
-            var addressList = document.getElementById('address-list');
-            var addressItem = document.createElement('p');
-            addressItem.innerHTML = address;
-            addressList.appendChild(addressItem);
-            alert('地址已保存！');
-        } else {
-            alert('请输入地址。');
-        }
-    }
-
-    function submitFeedback() {
-        var feedbackMessage = document.getElementById('feedback-message').value;
-        if (feedbackMessage) {
-            document.getElementById('feedback-status').innerHTML = '感谢您的反馈！';
-            document.getElementById('feedback-message').value = '';
-        } else {
-            alert('请输入反馈内容。');
-        }
-    }
-	
-	function renderMedicineList() {
-        var medicinesContainer = document.getElementById('medicines');
-        medicinesContainer.innerHTML = ''; // Clear previous content
-
-        medicines.forEach(function(medicine) {
-            var medicineDiv = document.createElement('div');
-            medicineDiv.className = 'medicine-item';
-
-            medicineDiv.innerHTML = `
-                <img src="${medicine.image}" alt="${medicine.name}">
-                <h3>${medicine.name}</h3>
-                <p>${medicine.description}</p>
-                <p>价格: ¥${medicine.price}</p>
-                <button onclick="addToCart(${medicine.id})">加入购物车</button>
-            `;
-
-            medicinesContainer.appendChild(medicineDiv);
-        });
-    }
-	if (document.getElementById('medicine-list-page').style.display !== 'none') {
-        renderMedicineList();
-    }
-    window.login = login;
-    window.viewCart = viewCart;
-    window.backToMedicines = backToMedicines;
-    window.pay = pay;
-    window.closePopup = closePopup;
-    window.showRegister = showRegister;
-    window.register = register;
-    window.showTab = showTab;
-    window.addAddress = addAddress;
-    window.submitFeedback = submitFeedback;
-})();
-
+function closePopup() {
+    document.getElementById("barcode-popup").style.display = "none";
+}
